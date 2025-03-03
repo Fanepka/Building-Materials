@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оплата успешна</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Магазин стройматериалов</h1>
+    <nav>
+      <a href="/">Главная</a>
+      <a href="/cart">Корзина</a>
+    </nav>
+  </header>
+  
+  <main class="success-page">
+    <div class="success-container">
+      <img src="{{ url_for('static', filename='images/success-icon.png') }}" alt="Успешно">
+      <h2>Оплата прошла успешно!</h2>
+      <p>Спасибо за ваш заказ. Мы свяжемся с вами в ближайшее время.</p>
+      <a href="/" class="home-button">Вернуться на главную</a>
+    </div>
+  </main>
+  <footer>
+    <div class="contacts">
+      <h3>Контакты</h3>
+      <p>Email: example@example.com</p>
+      <p>Телефон: +7 (123) 456-78-90</p>
+    </div>
+  </footer>
+</body>
+</html>

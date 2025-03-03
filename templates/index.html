@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Стройматериалы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Магазин стройматериалов</h1>
+    <nav>
+      <a href="/">Главная</a>
+      <a href="/cart">Корзина</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Популярные товары</h2>
+    <div class="products">
+      <div class="product">
+        <img src="{{ url_for('static', filename='images/brick.jpg') }}" alt="Кирпич">
+        <h3>Кирпич</h3>
+        <p>Цена: 100 руб.</p>
+        <button onclick="addToCart('Кирпич', 100)">Добавить в корзину</button>
+      </div>
+      <div class="product">
+        <img src="{{ url_for('static', filename='images/cement.jpg') }}" alt="Цемент">
+        <h3>Цемент</h3>
+        <p>Цена: 200 руб.</p>
+        <button onclick="addToCart('Цемент', 200)">Добавить в корзину</button>
+      </div>
+    </div>
+  </main>
+  <script>
+    function addToCart(name, price) {
+      fetch('/add_to_cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, price })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('Товар добавлен в корзину!');
+      });
+    }
+  </script>
+  <footer>
+    <div class="contacts">
+      <h3>Контакты</h3>
+      <p>Email: example@example.com</p>
+      <p>Телефон: +7 (123) 456-78-90</p>
+    </div>
+  </footer>
+</body>
+</html>

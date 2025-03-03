@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Корзина</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Корзина</h1>
+    <nav>
+      <a href="/">Главная</a>
+      <a href="/cart">Корзина</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Ваши товары</h2>
+    <div id="cart-items"></div>
+    <button onclick="checkout()">Оплатить</button>
+  </main>
+  <script>
+    function loadCart() {
+      fetch('/get_cart')
+        .then(response => response.json())
+        .then(cart => {
+          let cartItems = document.getElementById('cart-items');
+          cartItems.innerHTML = '';
+          cart.forEach(item => {
+            cartItems.innerHTML += `<p>${item.name} - ${item.price} руб.</p>`;
+          });
+        });
+    }
+
+    function checkout() {
+      fetch('/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.paymentUrl) {
+          window.location.href = data.paymentUrl;
+        } else {
+          alert('Ошибка при оплате');
+        }
+      });
+    }
+
+    loadCart();
+  </script>
+  <footer>
+    <div class="contacts">
+      <h3>Контакты</h3>
+      <p>Email: example@example.com</p>
+      <p>Телефон: +7 (123) 456-78-90</p>
+    </div>
+  </footer>
+</body>
+</html>
